@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot rpa="false" generated="20210604 17:01:53.408" schemaversion="2" generator="Robot 4.0.3 (Python 2.7.17 on darwin)">
+<suite source="/Users/ankulkar/PycharmProjects/Parkside/testcases/contents_box_tests.robot" id="s1" name="Contents Box Tests">
+<test id="s1-t1" name="Verify headings in Contents box">
+<kw name="Open Browser To Metis Page" library="resource">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20210604 17:01:53.789" level="INFO">Opening browser 'Firefox' to base url 'https://en.wikipedia.org/wiki/Metis_(mythology)'.</msg>
+<msg timestamp="20210604 17:01:53.791" level="INFO">Firefox driver log is always forced to to: /Users/ankulkar/PycharmProjects/Parkside/testcases/geckodriver-3.log</msg>
+<status status="PASS" endtime="20210604 17:01:59.033" starttime="20210604 17:01:53.788"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210604 17:01:59.522" starttime="20210604 17:01:59.034"/>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<arg>${DELAY}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" endtime="20210604 17:01:59.523" starttime="20210604 17:01:59.522"/>
+</kw>
+<kw name="Web Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Metis (mythology) - Wikipedia</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20210604 17:02:00.529" level="INFO">Page title is 'Metis (mythology) - Wikipedia'.</msg>
+<status status="PASS" endtime="20210604 17:02:00.529" starttime="20210604 17:01:59.523"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:00.530" starttime="20210604 17:01:59.523"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:00.530" starttime="20210604 17:01:53.788"/>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${AllLinksCount}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li/a</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20210604 17:02:01.545" level="INFO">${AllLinksCount} = 6</msg>
+<status status="PASS" endtime="20210604 17:02:01.545" starttime="20210604 17:02:00.531"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${AllLinksCount}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210604 17:02:01.546" level="INFO">6</msg>
+<status status="PASS" endtime="20210604 17:02:01.546" starttime="20210604 17:02:01.545"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{LinkItems}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20210604 17:02:01.547" level="INFO">@{LinkItems} = [ ]</msg>
+<status status="PASS" endtime="20210604 17:02:01.547" starttime="20210604 17:02:01.546"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${count}</var>
+<value>1</value>
+<value>${AllLinksCount}+1</value>
+<iter>
+<var name="${count}">1</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:03.581" level="INFO">${lintext} = Family</msg>
+<status status="PASS" endtime="20210604 17:02:03.581" starttime="20210604 17:02:01.548"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${hreftext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20210604 17:02:05.608" level="INFO">${hreftext} = https://en.wikipedia.org/wiki/Metis_(mythology)#Family</msg>
+<status status="PASS" endtime="20210604 17:02:05.608" starttime="20210604 17:02:03.581"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${href}</var>
+<arg>${hreftext}</arg>
+<arg>${LOGIN URL}</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20210604 17:02:05.609" level="INFO">${href} = #Family</msg>
+<status status="PASS" endtime="20210604 17:02:05.609" starttime="20210604 17:02:05.608"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${lintext}</var>
+<arg>${lintext}</arg>
+<arg>${space}</arg>
+<arg>_</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20210604 17:02:05.610" level="INFO">${lintext} = Family</msg>
+<status status="PASS" endtime="20210604 17:02:05.610" starttime="20210604 17:02:05.609"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${link}</var>
+<arg>SEPARATOR=</arg>
+<arg>\#</arg>
+<arg>${lintext}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20210604 17:02:05.611" level="INFO">${link} = #Family</msg>
+<status status="PASS" endtime="20210604 17:02:05.611" starttime="20210604 17:02:05.610"/>
+</kw>
+<kw name="Should Match" library="BuiltIn">
+<arg>${href}</arg>
+<arg>${link}</arg>
+<doc>Fails if the given ``string`` does not match the given ``pattern``.</doc>
+<status status="PASS" endtime="20210604 17:02:05.612" starttime="20210604 17:02:05.611"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:05.612" starttime="20210604 17:02:01.548"/>
+</iter>
+<iter>
+<var name="${count}">2</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:07.646" level="INFO">${lintext} = Mythology</msg>
+<status status="PASS" endtime="20210604 17:02:07.646" starttime="20210604 17:02:05.613"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${hreftext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20210604 17:02:09.676" level="INFO">${hreftext} = https://en.wikipedia.org/wiki/Metis_(mythology)#Mythology</msg>
+<status status="PASS" endtime="20210604 17:02:09.677" starttime="20210604 17:02:07.646"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${href}</var>
+<arg>${hreftext}</arg>
+<arg>${LOGIN URL}</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20210604 17:02:09.678" level="INFO">${href} = #Mythology</msg>
+<status status="PASS" endtime="20210604 17:02:09.678" starttime="20210604 17:02:09.677"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${lintext}</var>
+<arg>${lintext}</arg>
+<arg>${space}</arg>
+<arg>_</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20210604 17:02:09.679" level="INFO">${lintext} = Mythology</msg>
+<status status="PASS" endtime="20210604 17:02:09.679" starttime="20210604 17:02:09.678"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${link}</var>
+<arg>SEPARATOR=</arg>
+<arg>\#</arg>
+<arg>${lintext}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20210604 17:02:09.680" level="INFO">${link} = #Mythology</msg>
+<status status="PASS" endtime="20210604 17:02:09.680" starttime="20210604 17:02:09.679"/>
+</kw>
+<kw name="Should Match" library="BuiltIn">
+<arg>${href}</arg>
+<arg>${link}</arg>
+<doc>Fails if the given ``string`` does not match the given ``pattern``.</doc>
+<status status="PASS" endtime="20210604 17:02:09.681" starttime="20210604 17:02:09.680"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:09.681" starttime="20210604 17:02:05.613"/>
+</iter>
+<iter>
+<var name="${count}">3</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:11.709" level="INFO">${lintext} = In sociology</msg>
+<status status="PASS" endtime="20210604 17:02:11.709" starttime="20210604 17:02:09.681"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${hreftext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20210604 17:02:13.741" level="INFO">${hreftext} = https://en.wikipedia.org/wiki/Metis_(mythology)#In_sociology</msg>
+<status status="PASS" endtime="20210604 17:02:13.741" starttime="20210604 17:02:11.709"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${href}</var>
+<arg>${hreftext}</arg>
+<arg>${LOGIN URL}</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20210604 17:02:13.742" level="INFO">${href} = #In_sociology</msg>
+<status status="PASS" endtime="20210604 17:02:13.742" starttime="20210604 17:02:13.741"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${lintext}</var>
+<arg>${lintext}</arg>
+<arg>${space}</arg>
+<arg>_</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20210604 17:02:13.743" level="INFO">${lintext} = In_sociology</msg>
+<status status="PASS" endtime="20210604 17:02:13.743" starttime="20210604 17:02:13.742"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${link}</var>
+<arg>SEPARATOR=</arg>
+<arg>\#</arg>
+<arg>${lintext}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20210604 17:02:13.744" level="INFO">${link} = #In_sociology</msg>
+<status status="PASS" endtime="20210604 17:02:13.744" starttime="20210604 17:02:13.743"/>
+</kw>
+<kw name="Should Match" library="BuiltIn">
+<arg>${href}</arg>
+<arg>${link}</arg>
+<doc>Fails if the given ``string`` does not match the given ``pattern``.</doc>
+<status status="PASS" endtime="20210604 17:02:13.745" starttime="20210604 17:02:13.744"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:13.745" starttime="20210604 17:02:09.681"/>
+</iter>
+<iter>
+<var name="${count}">4</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:15.777" level="INFO">${lintext} = Honours</msg>
+<status status="PASS" endtime="20210604 17:02:15.777" starttime="20210604 17:02:13.746"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${hreftext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20210604 17:02:17.803" level="INFO">${hreftext} = https://en.wikipedia.org/wiki/Metis_(mythology)#Honours</msg>
+<status status="PASS" endtime="20210604 17:02:17.803" starttime="20210604 17:02:15.778"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${href}</var>
+<arg>${hreftext}</arg>
+<arg>${LOGIN URL}</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20210604 17:02:17.805" level="INFO">${href} = #Honours</msg>
+<status status="PASS" endtime="20210604 17:02:17.805" starttime="20210604 17:02:17.804"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${lintext}</var>
+<arg>${lintext}</arg>
+<arg>${space}</arg>
+<arg>_</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20210604 17:02:17.806" level="INFO">${lintext} = Honours</msg>
+<status status="PASS" endtime="20210604 17:02:17.806" starttime="20210604 17:02:17.805"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${link}</var>
+<arg>SEPARATOR=</arg>
+<arg>\#</arg>
+<arg>${lintext}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20210604 17:02:17.807" level="INFO">${link} = #Honours</msg>
+<status status="PASS" endtime="20210604 17:02:17.807" starttime="20210604 17:02:17.806"/>
+</kw>
+<kw name="Should Match" library="BuiltIn">
+<arg>${href}</arg>
+<arg>${link}</arg>
+<doc>Fails if the given ``string`` does not match the given ``pattern``.</doc>
+<status status="PASS" endtime="20210604 17:02:17.808" starttime="20210604 17:02:17.807"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:17.808" starttime="20210604 17:02:13.746"/>
+</iter>
+<iter>
+<var name="${count}">5</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:19.842" level="INFO">${lintext} = References</msg>
+<status status="PASS" endtime="20210604 17:02:19.842" starttime="20210604 17:02:17.809"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${hreftext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20210604 17:02:21.872" level="INFO">${hreftext} = https://en.wikipedia.org/wiki/Metis_(mythology)#References</msg>
+<status status="PASS" endtime="20210604 17:02:21.872" starttime="20210604 17:02:19.843"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${href}</var>
+<arg>${hreftext}</arg>
+<arg>${LOGIN URL}</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20210604 17:02:21.873" level="INFO">${href} = #References</msg>
+<status status="PASS" endtime="20210604 17:02:21.873" starttime="20210604 17:02:21.872"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${lintext}</var>
+<arg>${lintext}</arg>
+<arg>${space}</arg>
+<arg>_</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20210604 17:02:21.874" level="INFO">${lintext} = References</msg>
+<status status="PASS" endtime="20210604 17:02:21.874" starttime="20210604 17:02:21.874"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${link}</var>
+<arg>SEPARATOR=</arg>
+<arg>\#</arg>
+<arg>${lintext}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20210604 17:02:21.875" level="INFO">${link} = #References</msg>
+<status status="PASS" endtime="20210604 17:02:21.875" starttime="20210604 17:02:21.875"/>
+</kw>
+<kw name="Should Match" library="BuiltIn">
+<arg>${href}</arg>
+<arg>${link}</arg>
+<doc>Fails if the given ``string`` does not match the given ``pattern``.</doc>
+<status status="PASS" endtime="20210604 17:02:21.876" starttime="20210604 17:02:21.876"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:21.877" starttime="20210604 17:02:17.809"/>
+</iter>
+<iter>
+<var name="${count}">6</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:23.908" level="INFO">${lintext} = Further reading</msg>
+<status status="PASS" endtime="20210604 17:02:23.908" starttime="20210604 17:02:21.877"/>
+</kw>
+<kw name="Get Element Attribute" library="SeleniumLibrary">
+<var>${hreftext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<arg>href</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20210604 17:02:25.935" level="INFO">${hreftext} = https://en.wikipedia.org/wiki/Metis_(mythology)#Further_reading</msg>
+<status status="PASS" endtime="20210604 17:02:25.935" starttime="20210604 17:02:23.909"/>
+</kw>
+<kw name="Remove String" library="String">
+<var>${href}</var>
+<arg>${hreftext}</arg>
+<arg>${LOGIN URL}</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<msg timestamp="20210604 17:02:25.936" level="INFO">${href} = #Further_reading</msg>
+<status status="PASS" endtime="20210604 17:02:25.936" starttime="20210604 17:02:25.935"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${lintext}</var>
+<arg>${lintext}</arg>
+<arg>${space}</arg>
+<arg>_</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<msg timestamp="20210604 17:02:25.937" level="INFO">${lintext} = Further_reading</msg>
+<status status="PASS" endtime="20210604 17:02:25.937" starttime="20210604 17:02:25.936"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${link}</var>
+<arg>SEPARATOR=</arg>
+<arg>\#</arg>
+<arg>${lintext}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20210604 17:02:25.938" level="INFO">${link} = #Further_reading</msg>
+<status status="PASS" endtime="20210604 17:02:25.938" starttime="20210604 17:02:25.937"/>
+</kw>
+<kw name="Should Match" library="BuiltIn">
+<arg>${href}</arg>
+<arg>${link}</arg>
+<doc>Fails if the given ``string`` does not match the given ``pattern``.</doc>
+<status status="PASS" endtime="20210604 17:02:25.939" starttime="20210604 17:02:25.938"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:25.939" starttime="20210604 17:02:21.877"/>
+</iter>
+<status status="PASS" endtime="20210604 17:02:25.939" starttime="20210604 17:02:01.547"/>
+</for>
+<kw type="TEARDOWN" name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210604 17:02:29.651" starttime="20210604 17:02:25.940"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:29.651" starttime="20210604 17:01:53.787"/>
+</test>
+<test id="s1-t2" name="Verify hyperlinks in Contents box">
+<kw name="Open Browser To Metis Page" library="resource">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20210604 17:02:29.655" level="INFO">Opening browser 'Firefox' to base url 'https://en.wikipedia.org/wiki/Metis_(mythology)'.</msg>
+<msg timestamp="20210604 17:02:29.655" level="INFO">Firefox driver log is always forced to to: /Users/ankulkar/PycharmProjects/Parkside/testcases/geckodriver-4.log</msg>
+<status status="PASS" endtime="20210604 17:02:35.489" starttime="20210604 17:02:29.654"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20210604 17:02:36.970" starttime="20210604 17:02:35.490"/>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<arg>${DELAY}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" endtime="20210604 17:02:36.971" starttime="20210604 17:02:36.970"/>
+</kw>
+<kw name="Web Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Metis (mythology) - Wikipedia</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20210604 17:02:37.981" level="INFO">Page title is 'Metis (mythology) - Wikipedia'.</msg>
+<status status="PASS" endtime="20210604 17:02:37.981" starttime="20210604 17:02:36.972"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:37.982" starttime="20210604 17:02:36.971"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:37.982" starttime="20210604 17:02:29.653"/>
+</kw>
+<kw name="Get Element Count" library="SeleniumLibrary">
+<var>${AllLinksCount}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li/a</arg>
+<doc>Returns the number of elements matching ``locator``.</doc>
+<msg timestamp="20210604 17:02:38.998" level="INFO">${AllLinksCount} = 6</msg>
+<status status="PASS" endtime="20210604 17:02:38.998" starttime="20210604 17:02:37.982"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{LinkItems}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20210604 17:02:38.999" level="INFO">@{LinkItems} = [ ]</msg>
+<status status="PASS" endtime="20210604 17:02:38.999" starttime="20210604 17:02:38.999"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${count}</var>
+<value>1</value>
+<value>${AllLinksCount}+1</value>
+<iter>
+<var name="${count}">1</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:41.030" level="INFO">${lintext} = Family</msg>
+<status status="PASS" endtime="20210604 17:02:41.030" starttime="20210604 17:02:39.000"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:41.031" level="INFO">Clicking link 'xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-1")]/a'.</msg>
+<status status="PASS" endtime="20210604 17:02:44.102" starttime="20210604 17:02:41.030"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>return window.getSelection().anchorNode.parentNode.innerHTML;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:02:44.104" level="INFO">Executing JavaScript:
+return window.getSelection().anchorNode.parentNode.innerHTML;
+Without any arguments.</msg>
+<msg timestamp="20210604 17:02:45.118" level="INFO">${text} = Family</msg>
+<status status="PASS" endtime="20210604 17:02:45.118" starttime="20210604 17:02:44.103"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210604 17:02:45.119" level="INFO">Family</msg>
+<status status="PASS" endtime="20210604 17:02:45.119" starttime="20210604 17:02:45.118"/>
+</kw>
+<kw name="Scroll To Element" library="resource">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li/a</arg>
+<kw name="Get Horizontal Position" library="SeleniumLibrary">
+<var>${x}</var>
+<arg>${locator}</arg>
+<doc>Returns the horizontal position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:47.149" level="INFO">${x} = 209.0</msg>
+<status status="PASS" endtime="20210604 17:02:47.149" starttime="20210604 17:02:45.120"/>
+</kw>
+<kw name="Get Vertical Position" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${locator}</arg>
+<doc>Returns the vertical position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:49.172" level="INFO">${y} = 442.0</msg>
+<status status="PASS" endtime="20210604 17:02:49.172" starttime="20210604 17:02:47.150"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window.scrollTo(${x}, ${y})</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:02:49.174" level="INFO">Executing JavaScript:
+window.scrollTo(209.0, 442.0)
+Without any arguments.</msg>
+<status status="PASS" endtime="20210604 17:02:50.187" starttime="20210604 17:02:49.172"/>
+</kw>
+<kw name="Get Element" library="resource">
+<var>${element}</var>
+<arg>${locator}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${element}</var>
+<arg>${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210604 17:02:51.200" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:02:51.200" starttime="20210604 17:02:50.189"/>
+</kw>
+<msg timestamp="20210604 17:02:51.201" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:02:51.201" starttime="20210604 17:02:50.188"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:51.201" starttime="20210604 17:02:45.119"/>
+</kw>
+<status status="PASS" endtime="20210604 17:02:51.201" starttime="20210604 17:02:39.000"/>
+</iter>
+<iter>
+<var name="${count}">2</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:53.232" level="INFO">${lintext} = Mythology</msg>
+<status status="PASS" endtime="20210604 17:02:53.233" starttime="20210604 17:02:51.202"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:53.234" level="INFO">Clicking link 'xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-2")]/a'.</msg>
+<status status="PASS" endtime="20210604 17:02:56.283" starttime="20210604 17:02:53.233"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>return window.getSelection().anchorNode.parentNode.innerHTML;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:02:56.286" level="INFO">Executing JavaScript:
+return window.getSelection().anchorNode.parentNode.innerHTML;
+Without any arguments.</msg>
+<msg timestamp="20210604 17:02:57.297" level="INFO">${text} = Mythology</msg>
+<status status="PASS" endtime="20210604 17:02:57.297" starttime="20210604 17:02:56.284"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210604 17:02:57.298" level="INFO">Mythology</msg>
+<status status="PASS" endtime="20210604 17:02:57.299" starttime="20210604 17:02:57.298"/>
+</kw>
+<kw name="Scroll To Element" library="resource">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li/a</arg>
+<kw name="Get Horizontal Position" library="SeleniumLibrary">
+<var>${x}</var>
+<arg>${locator}</arg>
+<doc>Returns the horizontal position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:02:59.320" level="INFO">${x} = 209.0</msg>
+<status status="PASS" endtime="20210604 17:02:59.320" starttime="20210604 17:02:57.300"/>
+</kw>
+<kw name="Get Vertical Position" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${locator}</arg>
+<doc>Returns the vertical position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:01.343" level="INFO">${y} = 442.0</msg>
+<status status="PASS" endtime="20210604 17:03:01.343" starttime="20210604 17:02:59.321"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window.scrollTo(${x}, ${y})</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:01.345" level="INFO">Executing JavaScript:
+window.scrollTo(209.0, 442.0)
+Without any arguments.</msg>
+<status status="PASS" endtime="20210604 17:03:02.356" starttime="20210604 17:03:01.343"/>
+</kw>
+<kw name="Get Element" library="resource">
+<var>${element}</var>
+<arg>${locator}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${element}</var>
+<arg>${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210604 17:03:03.371" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:03.371" starttime="20210604 17:03:02.357"/>
+</kw>
+<msg timestamp="20210604 17:03:03.372" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:03.372" starttime="20210604 17:03:02.356"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:03.372" starttime="20210604 17:02:57.299"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:03.372" starttime="20210604 17:02:51.202"/>
+</iter>
+<iter>
+<var name="${count}">3</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:05.397" level="INFO">${lintext} = In sociology</msg>
+<status status="PASS" endtime="20210604 17:03:05.397" starttime="20210604 17:03:03.373"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:05.398" level="INFO">Clicking link 'xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-3")]/a'.</msg>
+<status status="PASS" endtime="20210604 17:03:08.450" starttime="20210604 17:03:05.397"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>return window.getSelection().anchorNode.parentNode.innerHTML;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:08.453" level="INFO">Executing JavaScript:
+return window.getSelection().anchorNode.parentNode.innerHTML;
+Without any arguments.</msg>
+<msg timestamp="20210604 17:03:09.459" level="INFO">${text} = In sociology</msg>
+<status status="PASS" endtime="20210604 17:03:09.459" starttime="20210604 17:03:08.451"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210604 17:03:09.460" level="INFO">In sociology</msg>
+<status status="PASS" endtime="20210604 17:03:09.461" starttime="20210604 17:03:09.460"/>
+</kw>
+<kw name="Scroll To Element" library="resource">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li/a</arg>
+<kw name="Get Horizontal Position" library="SeleniumLibrary">
+<var>${x}</var>
+<arg>${locator}</arg>
+<doc>Returns the horizontal position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:11.479" level="INFO">${x} = 209.0</msg>
+<status status="PASS" endtime="20210604 17:03:11.479" starttime="20210604 17:03:09.462"/>
+</kw>
+<kw name="Get Vertical Position" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${locator}</arg>
+<doc>Returns the vertical position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:13.499" level="INFO">${y} = 442.0</msg>
+<status status="PASS" endtime="20210604 17:03:13.499" starttime="20210604 17:03:11.479"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window.scrollTo(${x}, ${y})</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:13.501" level="INFO">Executing JavaScript:
+window.scrollTo(209.0, 442.0)
+Without any arguments.</msg>
+<status status="PASS" endtime="20210604 17:03:14.512" starttime="20210604 17:03:13.499"/>
+</kw>
+<kw name="Get Element" library="resource">
+<var>${element}</var>
+<arg>${locator}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${element}</var>
+<arg>${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210604 17:03:15.525" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:15.525" starttime="20210604 17:03:14.514"/>
+</kw>
+<msg timestamp="20210604 17:03:15.526" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:15.526" starttime="20210604 17:03:14.513"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:15.526" starttime="20210604 17:03:09.461"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:15.526" starttime="20210604 17:03:03.373"/>
+</iter>
+<iter>
+<var name="${count}">4</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:17.551" level="INFO">${lintext} = Honours</msg>
+<status status="PASS" endtime="20210604 17:03:17.551" starttime="20210604 17:03:15.527"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:17.552" level="INFO">Clicking link 'xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-4")]/a'.</msg>
+<status status="PASS" endtime="20210604 17:03:20.598" starttime="20210604 17:03:17.551"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>return window.getSelection().anchorNode.parentNode.innerHTML;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:20.601" level="INFO">Executing JavaScript:
+return window.getSelection().anchorNode.parentNode.innerHTML;
+Without any arguments.</msg>
+<msg timestamp="20210604 17:03:21.608" level="INFO">${text} = Honours</msg>
+<status status="PASS" endtime="20210604 17:03:21.608" starttime="20210604 17:03:20.599"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210604 17:03:21.609" level="INFO">Honours</msg>
+<status status="PASS" endtime="20210604 17:03:21.609" starttime="20210604 17:03:21.609"/>
+</kw>
+<kw name="Scroll To Element" library="resource">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li/a</arg>
+<kw name="Get Horizontal Position" library="SeleniumLibrary">
+<var>${x}</var>
+<arg>${locator}</arg>
+<doc>Returns the horizontal position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:23.630" level="INFO">${x} = 209.0</msg>
+<status status="PASS" endtime="20210604 17:03:23.630" starttime="20210604 17:03:21.610"/>
+</kw>
+<kw name="Get Vertical Position" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${locator}</arg>
+<doc>Returns the vertical position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:25.648" level="INFO">${y} = 442.0</msg>
+<status status="PASS" endtime="20210604 17:03:25.648" starttime="20210604 17:03:23.630"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window.scrollTo(${x}, ${y})</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:25.650" level="INFO">Executing JavaScript:
+window.scrollTo(209.0, 442.0)
+Without any arguments.</msg>
+<status status="PASS" endtime="20210604 17:03:26.662" starttime="20210604 17:03:25.648"/>
+</kw>
+<kw name="Get Element" library="resource">
+<var>${element}</var>
+<arg>${locator}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${element}</var>
+<arg>${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210604 17:03:27.672" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:27.672" starttime="20210604 17:03:26.663"/>
+</kw>
+<msg timestamp="20210604 17:03:27.673" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:27.673" starttime="20210604 17:03:26.662"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:27.674" starttime="20210604 17:03:21.609"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:27.674" starttime="20210604 17:03:15.526"/>
+</iter>
+<iter>
+<var name="${count}">5</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:29.694" level="INFO">${lintext} = References</msg>
+<status status="PASS" endtime="20210604 17:03:29.694" starttime="20210604 17:03:27.674"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:29.696" level="INFO">Clicking link 'xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-5")]/a'.</msg>
+<status status="PASS" endtime="20210604 17:03:32.739" starttime="20210604 17:03:29.695"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>return window.getSelection().anchorNode.parentNode.innerHTML;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:32.741" level="INFO">Executing JavaScript:
+return window.getSelection().anchorNode.parentNode.innerHTML;
+Without any arguments.</msg>
+<msg timestamp="20210604 17:03:33.748" level="INFO">${text} = References</msg>
+<status status="PASS" endtime="20210604 17:03:33.748" starttime="20210604 17:03:32.740"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210604 17:03:33.749" level="INFO">References</msg>
+<status status="PASS" endtime="20210604 17:03:33.749" starttime="20210604 17:03:33.749"/>
+</kw>
+<kw name="Scroll To Element" library="resource">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li/a</arg>
+<kw name="Get Horizontal Position" library="SeleniumLibrary">
+<var>${x}</var>
+<arg>${locator}</arg>
+<doc>Returns the horizontal position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:35.772" level="INFO">${x} = 209.0</msg>
+<status status="PASS" endtime="20210604 17:03:35.772" starttime="20210604 17:03:33.751"/>
+</kw>
+<kw name="Get Vertical Position" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${locator}</arg>
+<doc>Returns the vertical position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:37.788" level="INFO">${y} = 442.0</msg>
+<status status="PASS" endtime="20210604 17:03:37.788" starttime="20210604 17:03:35.772"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window.scrollTo(${x}, ${y})</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:37.790" level="INFO">Executing JavaScript:
+window.scrollTo(209.0, 442.0)
+Without any arguments.</msg>
+<status status="PASS" endtime="20210604 17:03:38.802" starttime="20210604 17:03:37.789"/>
+</kw>
+<kw name="Get Element" library="resource">
+<var>${element}</var>
+<arg>${locator}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${element}</var>
+<arg>${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210604 17:03:39.811" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:39.811" starttime="20210604 17:03:38.803"/>
+</kw>
+<msg timestamp="20210604 17:03:39.812" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:39.812" starttime="20210604 17:03:38.802"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:39.812" starttime="20210604 17:03:33.750"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:39.812" starttime="20210604 17:03:27.674"/>
+</iter>
+<iter>
+<var name="${count}">6</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${lintext}</var>
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a/span[2]</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:41.836" level="INFO">${lintext} = Further reading</msg>
+<status status="PASS" endtime="20210604 17:03:41.836" starttime="20210604 17:03:39.813"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-${count}")]/a</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:41.837" level="INFO">Clicking link 'xpath=//div[contains(@id, "toc")]/ul/li[contains(@class, "toclevel-1 tocsection-6")]/a'.</msg>
+<status status="PASS" endtime="20210604 17:03:44.886" starttime="20210604 17:03:41.836"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>return window.getSelection().anchorNode.parentNode.innerHTML;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:44.888" level="INFO">Executing JavaScript:
+return window.getSelection().anchorNode.parentNode.innerHTML;
+Without any arguments.</msg>
+<msg timestamp="20210604 17:03:45.900" level="INFO">${text} = Further reading</msg>
+<status status="PASS" endtime="20210604 17:03:45.900" starttime="20210604 17:03:44.886"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20210604 17:03:45.901" level="INFO">Further reading</msg>
+<status status="PASS" endtime="20210604 17:03:45.901" starttime="20210604 17:03:45.901"/>
+</kw>
+<kw name="Scroll To Element" library="resource">
+<arg>xpath=//div[contains(@id, "toc")]/ul/li/a</arg>
+<kw name="Get Horizontal Position" library="SeleniumLibrary">
+<var>${x}</var>
+<arg>${locator}</arg>
+<doc>Returns the horizontal position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:47.925" level="INFO">${x} = 209.0</msg>
+<status status="PASS" endtime="20210604 17:03:47.925" starttime="20210604 17:03:45.902"/>
+</kw>
+<kw name="Get Vertical Position" library="SeleniumLibrary">
+<var>${y}</var>
+<arg>${locator}</arg>
+<doc>Returns the vertical position of the element identified by ``locator``.</doc>
+<msg timestamp="20210604 17:03:49.948" level="INFO">${y} = 442.0</msg>
+<status status="PASS" endtime="20210604 17:03:49.948" starttime="20210604 17:03:47.926"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window.scrollTo(${x}, ${y})</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20210604 17:03:49.950" level="INFO">Executing JavaScript:
+window.scrollTo(209.0, 442.0)
+Without any arguments.</msg>
+<status status="PASS" endtime="20210604 17:03:50.961" starttime="20210604 17:03:49.948"/>
+</kw>
+<kw name="Get Element" library="resource">
+<var>${element}</var>
+<arg>${locator}</arg>
+<kw name="Get WebElement" library="SeleniumLibrary">
+<var>${element}</var>
+<arg>${locator}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<msg timestamp="20210604 17:03:51.978" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:51.978" starttime="20210604 17:03:50.962"/>
+</kw>
+<msg timestamp="20210604 17:03:51.978" level="INFO">${element} = &lt;selenium.webdriver.firefox.webelement.FirefoxWebElement (session="97c1dd0d-f5dc-f841-9bb6-bd38d73ff105", element="ee845572-9eb9-6f4e-95ae-88169c73cb50")&gt;</msg>
+<status status="PASS" endtime="20210604 17:03:51.979" starttime="20210604 17:03:50.961"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:51.979" starttime="20210604 17:03:45.902"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:51.979" starttime="20210604 17:03:39.813"/>
+</iter>
+<status status="PASS" endtime="20210604 17:03:51.979" starttime="20210604 17:02:39.000"/>
+</for>
+<kw type="TEARDOWN" name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20210604 17:03:53.625" starttime="20210604 17:03:51.980"/>
+</kw>
+<status status="PASS" endtime="20210604 17:03:53.626" starttime="20210604 17:02:29.652"/>
+</test>
+<doc>A test suite with test cases to verify items in contents section of the page
+
+This test has a workflow that is created using keywords in
+the imported resource file.</doc>
+<status status="PASS" endtime="20210604 17:03:53.627" starttime="20210604 17:01:53.412"/>
+</suite>
+<statistics>
+<total>
+<stat fail="0" skip="0" pass="2">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="0" skip="0" id="s1" name="Contents Box Tests" pass="2">Contents Box Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
