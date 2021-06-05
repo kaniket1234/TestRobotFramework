@@ -64,11 +64,13 @@ The framework produces below mentioned result artifacts
 
 This log shows the execution log of each test case and test step. It provides detailed status of each test step. It is generated in html format.
 
-
+<img src="https://user-images.githubusercontent.com/43895354/120874494-c30c6f80-c55b-11eb-8aed-453e0697fb67.png" width="15%"></img> 
 
 ## Test Report
 
 The test report shows the execution result of test run. We can drill in from broader test suites, to test cases, to test steps. It also shows error message in case of failures. We also get feature to search certain test cases or even tag and filter test cases. It also provides start and end times for each and every test step.
+
+<img src="https://user-images.githubusercontent.com/43895354/120874551-eafbd300-c55b-11eb-92c6-e5b0809636ef.png" width="15%"></img> 
 
 
 ## Browser Logs
